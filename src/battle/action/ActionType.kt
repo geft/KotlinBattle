@@ -1,9 +1,9 @@
-package battle
+package battle.action
 
 /**
  * Created on 4/21/16.
  */
-enum class Action {
+enum class ActionType {
     ATTACK,
     DEFEND,
     NOTHING

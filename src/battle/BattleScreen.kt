@@ -10,8 +10,6 @@ import battle.character.Stats
 class BattleScreen {
     init {
         printSeparator()
-        println("Prepare for battle!")
-        printSeparator()
     }
 
     fun promptAction(): ActionType {
@@ -38,7 +36,7 @@ class BattleScreen {
     fun printStats(hero: Stats, enemy: Stats) {
         printSeparator()
         printHpMp(hero)
-        printHpMp(enemy)
+        printHpMp(enemy, true)
         printSeparator()
     }
 
@@ -46,8 +44,12 @@ class BattleScreen {
         println("===================================")
     }
 
-    private fun printHpMp(input: Stats) {
-        println("${input.name} HP ${input.HP}, MP ${input.MP} ")
+    private fun printHpMp(input: Stats, hideMP: Boolean = false) {
+        var mpString = ", MP ${input.MP}/${input.maxMP}"
+
+        if (hideMP) mpString = ""
+
+        println("${input.name} HP ${input.HP}/${input.maxHP}$mpString")
     }
 
     private fun promptInput(): String? {
@@ -86,7 +88,11 @@ class BattleScreen {
         println("You lost. GAME OVER")
     }
 
-    fun attack(input: String, output: String, damage: Int) {
+    fun attack(input: String, output: String, damage: Int, isCritical: Boolean = false) {
+        if (isCritical) {
+            println("Critical strike!")
+        }
+
         println("$input attacked $output for $damage damage!")
     }
 

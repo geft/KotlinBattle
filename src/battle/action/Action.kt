@@ -8,12 +8,7 @@ import battle.character.Stats
  */
 class Action {
 
-    val defenceBoost: Int = 3
-    val screen: BattleScreen
-
-    init {
-        screen = BattleScreen()
-    }
+    val screen: BattleScreen = BattleScreen()
 
     fun orderBattle(hero: Stats, enemy: Stats) {
         when (screen.promptAction()) {
@@ -30,7 +25,6 @@ class Action {
             ActionType.DEFEND -> {
                 doDefend(hero)
                 doAttack(enemy, hero)
-                restoreDefence(hero)
             }
 
             else -> {
@@ -45,29 +39,11 @@ class Action {
     private fun isHeroFaster(hero: Stats, enemy: Stats) = hero.AGI >= enemy.AGI
 
     private fun doAttack(attacker: Stats, defender: Stats) {
-        var damage = attacker.ATK - defender.DEF
-
-        if (damage <= 0) {
-            damage = 1
-        }
-
-        defender.HP -= damage
-
-        screen.attack(attacker.name, defender.name, damage)
+        Attack(attacker, defender)
     }
 
     private fun doDefend(defender: Stats) {
-        boostDefence(defender)
-
-        screen.defend(defender.name)
-    }
-
-    private fun boostDefence(defender: Stats) {
-        defender.DEF += defenceBoost
-    }
-
-    private fun restoreDefence(defender: Stats) {
-        defender.DEF -= defenceBoost
+        Defend(defender)
     }
 
     private fun doNothing(hero: Stats) {

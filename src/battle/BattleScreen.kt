@@ -45,11 +45,11 @@ class BattleScreen {
     }
 
     private fun printHpMp(input: Stats, hideMP: Boolean = false) {
-        var mpString = ", MP ${input.MP}/${input.maxMP}"
+        var mpString = ", MP ${input.MP}/${input.HP}"
 
         if (hideMP) mpString = ""
 
-        println("${input.name} HP ${input.HP}/${input.maxHP}$mpString")
+        println("${input.name} HP ${input.HP}/${input.HP}$mpString")
     }
 
     private fun promptInput(): String? {

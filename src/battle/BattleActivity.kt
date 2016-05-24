@@ -3,6 +3,9 @@ package battle
 import battle.action.Action
 import battle.character.Enemy
 import battle.character.Hero
+import battle.enemy.Goblin
+import battle.enemy.Slime
+import java.util.*
 
 /**
  * Created on 4/18/16.
@@ -12,14 +15,23 @@ class BattleActivity {
 
     val action: Action
     val hero: Hero
-    val enemy: Enemy
+    var enemy: Enemy
 
     init {
         action = Action()
         hero = Hero()
-        enemy = Enemy()
+        enemy = selectEnemy()
 
         doBattle()
+    }
+
+    private fun selectEnemy(): Enemy {
+        val list: List<Enemy> = listOf(
+                Goblin(),
+                Slime())
+        val selected: Int = Random().nextInt(list.size)
+
+        return list.get(selected)
     }
 
     private fun doBattle() {

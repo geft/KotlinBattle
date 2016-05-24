@@ -35,10 +35,9 @@ class Attack {
     }
 
     private fun calculateCritical(): Boolean {
-        var rand: Random = Random()
         var isCritical: Boolean = false
 
-        if (rand.nextInt(5) == 1) {
+        if (Random().nextInt(5) == 1) {
             isCritical = true
         }
         return isCritical
